@@ -1,0 +1,20 @@
+CREATE ROLE admin_role WITH LOGIN PASSWORD 'admin1234';
+CREATE ROLE app_role WITH LOGIN PASSWORD 'app1234';
+CREATE ROLE readonly_role WITH LOGIN PASSWORD 'readonly1234';
+
+GRANT CONNECT ON DATABASE flytics TO admin_role, app_role, readonly_role;
+
+GRANT USAGE ON SCHEMA public TO admin_role, app_role, readonly_role;
+
+ALTER ROLE admin_role CREATEDB CREATEROLE;
+GRANT pg_read_all_data, pg_write_all_data TO admin_role;
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO app_role;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO app_role;
+
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO readonly_role;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO readonly_role;
+
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO app_role;
+GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO readonly_role;
+
