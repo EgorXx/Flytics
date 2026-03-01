@@ -337,6 +337,11 @@ WHERE first_name IN ('Alex', 'Olga', 'Ivan');
 ### Составной индекс
 
 ```sql
+DROP INDEX IF EXISTS idx_passenger_first_name_with_birthdate;
+CREATE INDEX idx_passenger_first_name_with_birthdate ON passenger (first_name text_pattern_ops, birthdate);
+```
+
+```sql
 EXPLAIN ANALYZE SELECT first_name, last_name
 FROM passenger
 WHERE first_name = 'Anna' AND birthdate > '1985-01-01';
