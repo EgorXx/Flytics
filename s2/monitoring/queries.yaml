@@ -1,0 +1,46 @@
+pg_version:
+  query: "SELECT current_setting('server_version_num')::int AS version_num, version() AS version_string"
+  master: true
+  metrics:
+    - version_num:
+        usage: "GAUGE"
+        description: "PostgreSQL version number"
+    - version_string:
+        usage: "LABEL"
+        description: "PostgreSQL full version string"
+
+pg_active_sessions:
+  query: |
+    SELECT
+      state,
+      COUNT(*) AS count
+    FROM pg_stat_activity
+    WHERE pid <> pg_backend_pid()
+    GROUP BY state
+  master: true
+  metrics:
+    - state:
+        usage: "LABEL"
+        description: "Session state"
+    - count:
+        usage: "GAUGE"
+        description: "Number of sessions by state"
+
+pg_operations:
+  query: |
+    SELECT
+      SUM(seq_scan + idx_scan) AS total_select,
+      SUM(n_tup_ins)           AS total_insert,
+      SUM(n_tup_del)           AS total_delete
+    FROM pg_stat_user_tables
+  master: true
+  metrics:
+    - total_select:
+        usage: "COUNTER"
+        description: "Total SELECT scans"
+    - total_insert:
+        usage: "COUNTER"
+        description: "Total INSERT operations"
+    - total_delete:
+        usage: "COUNTER"
+        description: "Total DELETE operations"
