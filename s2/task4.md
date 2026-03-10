@@ -17,7 +17,7 @@ UPDATE city SET name = 'Ufa City' WHERE name = 'Ufa';
 SELECT xmin, xmax, ctid, name FROM city WHERE name = 'Ufa City';
 ```
 
-![img.png](4_2.png)
+![img.png](images/4_2.png)
 
 xmin = 940 - изменился
 ctid - теперь указывает на новое значение
@@ -29,7 +29,7 @@ SELECT t_xmin, t_xmax, t_ctid, t_infomask, t_infomask2
 FROM heap_page_items(get_raw_page('city', 0));
 ```
 
-![img.png](4_3.png)
+![img.png](images/4_3.png)
 
 **t_infomask**  - хранит флаги, для определения свойств текущей версии
 
@@ -49,14 +49,14 @@ UPDATE city SET name = 'Test' WHERE id = 6;
 SELECT xmin, xmax, ctid FROM city WHERE id = 6;
 ```
 
-![img.png](4_4.png)
+![img.png](images/4_4.png)
 
 Сессия 2:
 ```sql
 SELECT xmin, xmax, ctid FROM city WHERE id = 6;
 ```
 
-![img.png](4_5.png)
+![img.png](images/4_5.png)
 
 Мы все еще видим старые данные из 2 сессии, пока не закомичено из сессии 1 (но xmax уже проставлен)
 
@@ -70,7 +70,7 @@ COMMIT;
 SELECT xmin, xmax, ctid FROM city WHERE id = 6;
 ```
 
-![img.png](4_6.png)
+![img.png](images/4_6.png)
 
 После коммита из 1 сессии, вторая начинает видеть новые данные
 
@@ -97,7 +97,7 @@ UPDATE city SET name = 'DeadlockA2' WHERE id = 7;
 UPDATE city SET name = 'DeadlockB2' WHERE id = 6;
 ```
 
-![img.png](4_7.png)
+![img.png](images/4_7.png)
 
 1. Сессия 1 обращается к строке id = 6, Сессия 2 обращается к строке с id = 7
 2. Сессия 1 хочет обратится к строке id = 7 (Но ее уже изменила Ссесия 2, но еще не закомитила) ждем
@@ -121,11 +121,11 @@ SELECT * FROM city WHERE id = 6 FOR UPDATE;
 ```
 
 Сессия 1:
-![img.png](4_8.png)
+![img.png](images/4_8.png)
 
 
 Сессия 2:
-![img.png](4_9.png)
+![img.png](images/4_9.png)
 
 
 Сессия 2 в ожидании разблокировки строки
@@ -153,7 +153,7 @@ SELECT * FROM city WHERE id = 6 FOR UPDATE;
 
 Нескольким транзакциям доступно чтение, но изменять нельзя
 
-![img.png](4_10.png)
+![img.png](images/4_10.png)
 
 Сессия 3 зависает в ожидании
 
@@ -167,7 +167,7 @@ FROM pg_stat_user_tables
 WHERE relname = 'city';
 ```
 
-![img.png](4_11.png)
+![img.png](images/4_11.png)
 
 После прошлых тестов, остались мертвые строки
 
@@ -180,6 +180,6 @@ FROM pg_stat_user_tables
 WHERE relname = 'city';
 ```
 
-![img.png](4_12.png)
+![img.png](images/4_12.png)
 
 Не используемые строки очистились
