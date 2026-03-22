@@ -1,6 +1,6 @@
 # Архитектура
 
-![img.png](6_1.png)
+![img.png](images/6_1.png)
 
 # Настроить потоковую репликацию
 
@@ -231,9 +231,9 @@ egorsorokin@MacBook-Air-9 s2 % cat dumps/flytics_schema.sql | docker exec -i s2-
 
 Накатываем dump схемы на subscriber
 
-![img.png](6_3.png)
+![img.png](images/6_3.png)
 
-![img.png](6_2.png)
+![img.png](images/6_2.png)
 
 
 Создание PUBLICATION на стороне postgres_master
@@ -285,7 +285,7 @@ egorsorokin@MacBook-Air-9 s2 % docker exec -it s2-postgres-subscriber-1 \
 ALTER TABLE city ADD COLUMN population INT;
 ```
 
-![img.png](6_4.png)
+![img.png](images/6_4.png)
 
 Не появилась на стороне postgres-subscriber
 
@@ -334,7 +334,7 @@ HINT:  To enable updating the table, set REPLICA IDENTITY using ALTER TABLE.
 SELECT * FROM pg_stat_replication;
 ```
 postgres-master
-![img.png](6_5.png)
+![img.png](images/6_5.png)
 
 ---
 
@@ -342,4 +342,4 @@ postgres-master
 SELECT * FROM pg_stat_subscription;
 ```
 postgres-subscriber
-![img.png](6_6.png)
+![img.png](images/6_6.png)
