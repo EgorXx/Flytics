@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/queue
+    username: postgres
+    password: qwerty007
+    driver-class-name: org.postgresql.Driver
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+app:
+  mode: producer
+
+producer:
+  rate-per-second: 100
