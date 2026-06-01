@@ -1,0 +1,10 @@
+[
+  {"product_id": "P001", "name": "Беспроводные наушники", "category": "Электроника", "supplier": "TechSupply", "cost": 900.00},
+  {"product_id": "P002", "name": "Механическая клавиатура", "category": "Электроника", "supplier": "KeyMaster", "cost": 2100.00},
+  {"product_id": "P003", "name": "Футболка хлопковая", "category": "Одежда", "supplier": "CottonPro", "cost": 300.00},
+  {"product_id": "P004", "name": "Кружка керамическая", "category": "Посуда", "supplier": "CeramicArt", "cost": 250.00},
+  {"product_id": "P005", "name": "Рюкзак городской", "category": "Аксессуары", "supplier": "BagLine", "cost": 1800.00},
+  {"product_id": "P006", "name": "Умные часы", "category": "Электроника", "supplier": "TechSupply", "cost": 3200.00},
+  {"product_id": "P007", "name": "Блокнот кожаный", "category": "Канцелярия", "supplier": "LeatherGoods", "cost": 800.00},
+  {"product_id": "P008", "name": "Офисное кресло", "category": "Мебель", "supplier": "ComfortSeat", "cost": 5500.00}
+]
